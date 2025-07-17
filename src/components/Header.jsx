@@ -183,9 +183,9 @@ const Header = () => {
               transition={{ duration: 0.3 }}
             >
               {isMenuOpen ? (
-                <X className="w-6 h-6 text-gray-800 dark:text-gray-200" />
+                <X className="w-6 h-6 text-gray-200" />
               ) : (
-                <Menu className="w-6 h-6 text-gray-800 dark:text-gray-200" />
+                <Menu className="w-6 h-6 text-gray-200" />
               )}
             </motion.div>
           </motion.button>
@@ -227,7 +227,7 @@ const Header = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1, duration: 0.3 }}
                         key={item}
-                        className="relative text-gray-800 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+                        className="relative text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
                         href="#"
                         onClick={toggleMenu}
                       >
@@ -244,14 +244,14 @@ const Header = () => {
                     className="flex items-center justify-center space-x-6 mb-6 "
                   >
                     <a
-                      className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+                      className="text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
                       href="#"
                     >
                       <GithubIcon className="w-6 h-6" />
                     </a>
 
                     <a
-                      className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+                      className="text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
                       href="#"
                     >
                       <LinkedinIcon className="w-6 h-6" />
