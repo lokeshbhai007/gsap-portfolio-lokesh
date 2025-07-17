@@ -216,7 +216,7 @@ const Header = () => {
                   stiffness: 300,
                   damping: 30,
                 }}
-                className="absolute top-full left-0 right-0 bg-white/95 dark:bg-gradient-to-t from-gray-700 to-gray-900 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-2xl z-40 md:hidden lg:hidden"
+                className="absolute top-full left-0 right-0 bg-gradient-to-t from-gray-700 to-gray-900 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-2xl z-40 md:hidden lg:hidden"
               >
                 <div className="container mx-auto px-4 py-6 ">
                   {/* mobile navigation */}
