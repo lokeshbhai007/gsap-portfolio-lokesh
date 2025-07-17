@@ -216,7 +216,7 @@ const Header = () => {
                   stiffness: 300,
                   damping: 30,
                 }}
-                className="absolute top-full left-0 right-0 bg-gradient-to-t from-gray-700 to-gray-900 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-2xl z-40 md:hidden lg:hidden"
+                className="absolute top-full left-0 right-0 bg-gradient-to-t from-gray-950 to-purple-950/50 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-2xl z-40 md:hidden lg:hidden"
               >
                 <div className="container mx-auto px-4 py-6 ">
                   {/* mobile navigation */}
@@ -258,10 +258,10 @@ const Header = () => {
                     </a>
 
                     <a
-                      className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+                      className="text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
                       href="#"
                     >
-                      <MailIcon className="w-6 h-6" />
+                      <MailIcon className="w-8 h-8" />
                     </a>
                   </motion.div>
 
