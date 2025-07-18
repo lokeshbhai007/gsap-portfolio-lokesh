@@ -100,7 +100,7 @@ export default function AboutSection() {
       <div className="container mx-auto px-4 flex flex-col items-center justify-center mb-10 md:mb-0">
         <h1
           ref={titleRef}
-          className="text-4xl md:text-6xl font-bold sm:mb-16 text-center text-white opacity-0 "
+          className="text-4xl md:text-6xl font-bold sm:mb-16 text-center text-white opacity-0 pt-4 "
         >
           About Me
         </h1>
@@ -114,7 +114,7 @@ export default function AboutSection() {
         <div ref={imageRef}>
           <Image
             src="/person-11.png"
-            width={420}
+            width={400}
             height={100}
             alt="profile-image"
             className="mix-blend-lighten opacity-75"

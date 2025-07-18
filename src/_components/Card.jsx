@@ -314,7 +314,7 @@ const StyledWrapper = styled.div`
   /* Mobile responsive - keep original mobile sizes */
   @media (max-width: 480px) {
     .card {
-      height: 220px;
+      height: 250px;
       gap: 1px;
       padding: 0.1em;
     }
@@ -331,7 +331,7 @@ const StyledWrapper = styled.div`
     .section-header span {
       min-width: 8em;
       padding: 0.2em;
-      font-size: 0.7em;
+      font-size: 0.8em;
       letter-spacing: 0.03em;
     }
 
@@ -340,7 +340,7 @@ const StyledWrapper = styled.div`
     }
 
     .section.open .section-header span {
-      font-size: 0.6em;
+      font-size: 0.7em;
     }
 
     .section-content {
@@ -353,7 +353,7 @@ const StyledWrapper = styled.div`
     }
 
     .info-item h4 {
-      font-size: 0.55em;
+      font-size: 0.75em;
       margin: 0 0 0.2em 0;
     }
 

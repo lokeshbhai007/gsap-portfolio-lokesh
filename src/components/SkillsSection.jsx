@@ -127,12 +127,12 @@ export default function SkillsSection() {
   return (
     <section
       ref={sectionRef}
-      className="max-h-screen min-h-screen relative overflow-hidden bg-gradient-to-b from-[black] to-[black] max-w-full"
+      className="max-h-screen min-h-screen relative overflow-hidden bg-gradient-to-b from-[black] to-[black] max-w-full mb-3"
     >
       <div className="container mx-auto px-4 flex flex-col items-center justify-center mb-10 md:mb-0">
         <h1
           ref={titleRef}
-          className="text-4xl md:text-6xl font-bold sm:mb-16 text-center text-white opacity-0 "
+          className="text-4xl md:text-6xl pt-6 pb-16 sm:pb-0 sm:pt-6 font-bold sm:mb-16 text-center text-white opacity-0 "
         >
           Skills
         </h1>
@@ -140,9 +140,9 @@ export default function SkillsSection() {
 
       <div 
         ref={menuContainerRef}
-        className="max-w-full pt-6 sm:py-0 sm:px-24 opacity-0"
+        className="max-w-full pt-6 sm:py-0 sm:mx-24 mx-6 opacity-0 sm:border-none border border-cyan-800"
       >
-        <div style={{ height: "500px", position: "relative" }}>
+        <div style={{ height: "520px", position: "relative" }}>
           <InfiniteMenu items={items} />
         </div>
       </div>
