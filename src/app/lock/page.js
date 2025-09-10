@@ -1,8 +1,7 @@
-
 "use client"
 
 import { useState } from 'react';
-import { MapPin, Navigation, Share2, Hash, Loader2, Users, Clock, CheckCircle, Copy, RotateCcw, User, Server } from 'lucide-react';
+import { MapPin, Navigation, Share2, Hash, Loader2, Users, Clock, CheckCircle, Copy, RotateCcw, User, Server, Database } from 'lucide-react';
 
 export default function DistanceChecker() {
   const [currentUser, setCurrentUser] = useState('');
@@ -34,12 +33,15 @@ export default function DistanceChecker() {
         }),
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to store location data');
+        throw new Error(result.error || 'Failed to store location data');
       }
 
-      return await response.json();
+      return result;
     } catch (error) {
+      console.error('Store location error:', error);
       throw new Error('Network error: ' + error.message);
     }
   };
@@ -54,15 +56,18 @@ export default function DistanceChecker() {
         },
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
         if (response.status === 404) {
           throw new Error('Invalid OTP or OTP expired');
         }
-        throw new Error('Failed to retrieve location data');
+        throw new Error(result.error || 'Failed to retrieve location data');
       }
 
-      return await response.json();
+      return result;
     } catch (error) {
+      console.error('Get location error:', error);
       throw new Error(error.message);
     }
   };
@@ -92,7 +97,7 @@ export default function DistanceChecker() {
           };
           
           if (user === 'personA') {
-            // Store location data on server
+            // Store location data in MongoDB
             await storeLocationData(newOtp, locationInfo);
             setPersonAData(locationInfo);
             setOtp(newOtp);
@@ -133,7 +138,7 @@ export default function DistanceChecker() {
     return R * c; // Distance in meters
   };
 
-  // Check distance using OTP with backend API
+  // Check distance using OTP with MongoDB API
   const checkDistanceWithOtp = async () => {
     if (!inputOtp) {
       setError('Please enter OTP');
@@ -145,7 +150,7 @@ export default function DistanceChecker() {
     setStep('calculating');
 
     try {
-      // Get Person A's location data from server
+      // Get Person A's location data from MongoDB
       const personALocation = await getLocationData(inputOtp);
       
       // Get Person B's current location
@@ -261,14 +266,14 @@ export default function DistanceChecker() {
               </p>
             </div>
 
-            {/* Backend Status Indicator */}
+            {/* MongoDB Status Indicator */}
             <div className="mt-4 p-3 bg-green-50 rounded-xl border border-green-200">
               <div className="flex items-center justify-center gap-2">
-                <Server className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-medium text-green-700">Backend-Powered</span>
+                <Database className="w-4 h-4 text-green-600" />
+                <span className="text-sm font-medium text-green-700">MongoDB Powered</span>
               </div>
               <p className="text-xs text-green-600 mt-1">
-                Location data shared securely between devices
+                Location data stored securely in cloud database
               </p>
             </div>
           </div>
@@ -293,7 +298,7 @@ export default function DistanceChecker() {
               {loading ? (
                 <>
                   <Loader2 className="w-6 h-6 animate-spin" />
-                  Storing Location on Server...
+                  Storing in MongoDB...
                 </>
               ) : (
                 <>
@@ -325,7 +330,7 @@ export default function DistanceChecker() {
               <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Location Stored on Server!</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Location Saved to Database!</h2>
               <p className="text-gray-600">Share this OTP with Person B</p>
             </div>
 
@@ -351,13 +356,13 @@ export default function DistanceChecker() {
 
               <div className="bg-blue-50 rounded-2xl p-6 border border-blue-200">
                 <div className="flex items-center gap-3 mb-3">
-                  <Server className="w-5 h-5 text-blue-600" />
-                  <span className="font-semibold text-blue-900">Server Status</span>
+                  <Database className="w-5 h-5 text-blue-600" />
+                  <span className="font-semibold text-blue-900">Database Status</span>
                 </div>
                 <div className="space-y-2 text-sm text-blue-700">
-                  <p><strong>Status:</strong> Location data securely stored</p>
+                  <p><strong>Status:</strong> Saved to MongoDB Atlas</p>
                   <p><strong>Accuracy:</strong> ±{Math.round(personAData.accuracy)} meters</p>
-                  <p><strong>Valid until:</strong> Person B uses the OTP</p>
+                  <p><strong>Expiry:</strong> 15 minutes from now</p>
                 </div>
               </div>
 
@@ -367,7 +372,7 @@ export default function DistanceChecker() {
                   <span className="text-sm font-medium text-yellow-800">Waiting for Person B</span>
                 </div>
                 <p className="text-xs text-yellow-700">
-                  Your location is safely stored on the server. Person B can now use your OTP from any device.
+                  Your location is safely stored in the cloud database. Person B can access it from any device worldwide.
                 </p>
               </div>
             </div>
@@ -407,7 +412,7 @@ export default function DistanceChecker() {
                   }}
                   placeholder="123456"
                   maxLength={6}
-                  className="w-full px-6 text-black py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-purple-100 focus:border-purple-400 text-center text-2xl font-mono tracking-widest transition-all"
+                  className="w-full text-black px-6 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-purple-100 focus:border-purple-400 text-center text-2xl font-mono tracking-widest transition-all"
                 />
                 <p className="text-xs text-gray-500 mt-2 text-center">
                   Ask Person A to share their OTP code with you
@@ -422,7 +427,7 @@ export default function DistanceChecker() {
                 {loading ? (
                   <>
                     <Loader2 className="w-6 h-6 animate-spin" />
-                    Fetching from Server...
+                    Fetching from Database...
                   </>
                 ) : (
                   <>
@@ -440,11 +445,11 @@ export default function DistanceChecker() {
 
               <div className="bg-green-50 rounded-xl p-4 border border-green-200">
                 <div className="flex items-center gap-2 mb-2">
-                  <Server className="w-4 h-4 text-green-600" />
-                  <span className="text-sm font-medium text-green-700">Server Connection</span>
+                  <Database className="w-4 h-4 text-green-600" />
+                  <span className="text-sm font-medium text-green-700">MongoDB Connection</span>
                 </div>
                 <p className="text-xs text-green-600">
-                  Will fetch Person A's location data from secure server
+                  Will fetch Person A's location from cloud database
                 </p>
               </div>
             </div>
@@ -466,7 +471,7 @@ export default function DistanceChecker() {
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Calculating Distance</h2>
             <p className="text-gray-600 mb-6">
-              Retrieved Person A's location from server, getting your precise location...
+              Retrieved Person A's location from MongoDB, getting your precise location...
             </p>
             <div className="bg-blue-50 rounded-2xl p-4 border border-blue-200">
               <p className="text-sm text-blue-700">
@@ -505,7 +510,7 @@ export default function DistanceChecker() {
                     Person A
                   </h4>
                   <p className="text-xs text-blue-700">
-                    Server data: ±{Math.round(personAData.accuracy)}m
+                    MongoDB: ±{Math.round(personAData.accuracy)}m
                   </p>
                 </div>
                 <div className="bg-purple-50 rounded-xl p-4 border border-purple-200">
@@ -521,11 +526,11 @@ export default function DistanceChecker() {
 
               <div className="bg-green-50 rounded-xl p-4 border border-green-200">
                 <div className="flex items-center gap-2 mb-2">
-                  <Server className="w-4 h-4 text-green-600" />
-                  <span className="text-sm font-medium text-green-700">Server-Powered Calculation</span>
+                  <Database className="w-4 h-4 text-green-600" />
+                  <span className="text-sm font-medium text-green-700">Database-Powered Calculation</span>
                 </div>
                 <p className="text-xs text-green-600">
-                  Location data securely retrieved and processed
+                  Location data securely retrieved from MongoDB Atlas
                 </p>
               </div>
             </div>
